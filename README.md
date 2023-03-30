@@ -14,3 +14,10 @@ Online Boutique is composed of 11 microservices written in different languages t
 
 ![App Architecture](images/architecture-diagram.png)
 
+## Microservices Detail
+
+| Microservice | Language | Working on Port | Env. Variables | Description                    |
+|--------------|----------|-----------|--------------|--------------------| 
+| frontend     | Go       |8080       |     |Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
+| cartservice  | C#       |8080       |     |Stores the items in the user's shopping cart in Redis and retrieves it.|
+
