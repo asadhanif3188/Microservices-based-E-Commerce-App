@@ -15,6 +15,15 @@ Online Boutique is composed of 11 microservices written in different languages t
 ![App Architecture](images/architecture-diagram.png)
 
 ## Microservices Detail
+As a DevOps engineer, we need following information from the developer, to deploy the Microservices:
+- Which microservices need to be deployed?
+- Which microservice is talking to which microservice? 
+- How are they communicating? 
+  - Directly using API calls, OR 
+  - Message Broker
+  - Service Mesh 
+- Which database are they using? 3rd Party Services
+- On which port does each microservice run? 
 
 |Microservice |Language|Working on Port | Env. Variables | Description                    |
 |--------------|----------|-----------|--------------|--------------------| 
