@@ -30,7 +30,7 @@ In this microservices demo, Redis as a Message Broker or in-memory database is b
 
 |Microservice |Language|Working on Port | Env. Variables | Image Path | Description                    |
 |----------|----------|-----------|-------------|-------------|--------------------| 
-| frontend     | Go | 8080 |     | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
+| frontend     | Go | 8080 |     |     | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
 | cartservice  | C# | 7070 |     |     | Stores the items in the user's shopping cart in Redis and retrieves it. |
 | productcatalogservice  | Go | 3550 |     |     | Provides the list of products from a JSON file and ability to search products and get individual products. |
 | currencyservice  | Nodejs | 7000 |     |     | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
