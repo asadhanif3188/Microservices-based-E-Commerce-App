@@ -16,17 +16,17 @@ Online Boutique is composed of 11 microservices written in different languages t
 
 ## Microservices Detail
 
-| Microservice | Language | Working on Port | Env. Variables | Description                    |
+|Microservice |Language|Working on Port | Env. Variables | Description                    |
 |--------------|----------|-----------|--------------|--------------------| 
-| frontend     | Go       |8080       |     | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
-| cartservice  | C#       |8080       |     | Stores the items in the user's shopping cart in Redis and retrieves it. |
-| productcatalogservice  | Go       |8080       |     | Provides the list of products from a JSON file and ability to search products and get individual products. |
-| currencyservice  | Nodejs       |8080       |     | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
-| paymentservice  | Nodejs       |8080       |     | Charges the given credit card info (mock) with the given amount and returns a transaction ID. |
-| shippingservice  | Go       |8080       |     | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock). |
-| emailservice  | Python       |8080       |     | Sends users an order confirmation email (mock). |
-| checkoutservice  | Go       |8080       |     | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification. |
-| recommendationservice  | Python       |8080       |     | Recommends other products based on what's given in the cart. |
-| adservice  | Java       |8080       |     | Provides text ads based on given context words. |
-| loadgenerator  | Python/Locust       |8080       |     | Continuously sends requests imitating realistic user shopping flows to the frontend. |
+| frontend     | Go |8080       |     | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
+| cartservice  | C# |8080       |     | Stores the items in the user's shopping cart in Redis and retrieves it. |
+| productcatalogservice  | Go |8080       |     | Provides the list of products from a JSON file and ability to search products and get individual products. |
+| currencyservice  | Nodejs |8080       |     | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
+| paymentservice  | Nodejs |8080       |     | Charges the given credit card info (mock) with the given amount and returns a transaction ID. |
+| shippingservice  | Go |8080       |     | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock). |
+| emailservice  | Python |8080       |     | Sends users an order confirmation email (mock). |
+| checkoutservice  | Go |8080       |     | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification. |
+| recommendationservice  | Python |8080       |     | Recommends other products based on what's given in the cart. |
+| adservice  | Java |8080       |     | Provides text ads based on given context words. |
+| loadgenerator  | Python/Locust |8080       |     | Continuously sends requests imitating realistic user shopping flows to the frontend. |
 
