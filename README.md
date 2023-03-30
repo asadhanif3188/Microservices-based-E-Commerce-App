@@ -18,6 +18,7 @@ Online Boutique is composed of 11 microservices written in different languages t
 
 | Microservice | Language | Working on Port | Env. Variables | Description                    |
 |--------------|----------|-----------|--------------|--------------------| 
-| frontend     | Go       |8080       |     |Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
-| cartservice  | C#       |8080       |     |Stores the items in the user's shopping cart in Redis and retrieves it.|
-
+| frontend     | Go       |8080       |     | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
+| cartservice  | C#       |8080       |     | Stores the items in the user's shopping cart in Redis and retrieves it. |
+| productcatalogservice  | Go       |8080       |     | Provides the list of products from a JSON file and ability to search products and get individual products. |
+| currencyservice  | Nodejs       |8080       |     | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
