@@ -30,15 +30,15 @@ In this microservices demo, Redis as a Message Broker or in-memory database is b
 
 |Microservice |Language|Working on Port | Env. Variables | Image Path | Description                    |
 |----------|----------|-----------|-------------|-------------|--------------------| 
-| frontend     | Go | 8080 |     |     | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
-| cartservice  | C# | 7070 |     |     | Stores the items in the user's shopping cart in Redis and retrieves it. |
-| productcatalogservice  | Go | 3550 |     |     | Provides the list of products from a JSON file and ability to search products and get individual products. |
-| currencyservice  | Nodejs | 7000 |     |     | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
-| paymentservice  | Nodejs | 50051 |     |     | Charges the given credit card info (mock) with the given amount and returns a transaction ID. |
-| shippingservice  | Go | 50051 |     |     | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock). |
-| emailservice  | Python | 8080 |     |     | Sends users an order confirmation email (mock). |
-| checkoutservice  | Go | 5050 |     |     | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification. |
-| recommendationservice  | Python | 8080 |     |     | Recommends other products based on what's given in the cart. |
-| adservice  | Java | 9555 |     |     | Provides text ads based on given context words. |
-| loadgenerator  | Python/Locust |  |     |     | Continuously sends requests imitating realistic user shopping flows to the frontend. |
+| frontend     | Go | 8080 |     | gcr.io/google-samples/microservices-demo/frontend:v0.2.3    | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
+| cartservice  | C# | 7070 |     | gcr.io/google-samples/microservices-demo/cartservice:v0.2.3    | Stores the items in the user's shopping cart in Redis and retrieves it. |
+| productcatalogservice  | Go | 3550 |     | gcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3    | Provides the list of products from a JSON file and ability to search products and get individual products. |
+| currencyservice  | Nodejs | 7000 |     | gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3    | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
+| paymentservice  | Nodejs | 50051 |     | gcr.io/google-samples/microservices-demo/paymentservice:v0.2.3    | Charges the given credit card info (mock) with the given amount and returns a transaction ID. |
+| shippingservice  | Go | 50051 |     | gcr.io/google-samples/microservices-demo/shippingservice:v0.2.3    | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock). |
+| emailservice  | Python | 8080 |     | gcr.io/google-samples/microservices-demo/emailservice:v0.2.3    | Sends users an order confirmation email (mock). |
+| checkoutservice  | Go | 5050 |     | gcr.io/google-samples/microservices-demo/checkoutservice:v0.2.3    | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification. |
+| recommendationservice  | Python | 8080 |     | gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.3    | Recommends other products based on what's given in the cart. |
+| adservice  | Java | 9555 |     | gcr.io/google-samples/microservices-demo/adservice:v0.2.3    | Provides text ads based on given context words. |
+| loadgenerator  | Python/Locust |  |     | gcr.io/google-samples/microservices-demo/loadgenerator:v0.2.3    | Continuously sends requests imitating realistic user shopping flows to the frontend. |
 
