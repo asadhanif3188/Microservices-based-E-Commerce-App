@@ -48,18 +48,57 @@ As a DevOps engineer, we need following information from the developer, to deplo
 
 |Microservice |Working on Port | Env. Variables | Image Path |
 |----------|--------|-------------|-------------|
-| frontend     | 8080 | PORT="8080" PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550" CURRENCY_SERVICE_ADDR="currencyservice:7000" CART_SERVICE_ADDR="cartservice:7070" RECOMMENDATION_SERVICE_ADDR="recommendationservice:8080" SHIPPING_SERVICE_ADDR="shippingservice:50051" CHECKOUT_SERVICE_ADDR="checkoutservice:5050" AD_SERVICE_ADDR="adservice:9555"    | gcr.io/google-samples/microservices-demo/frontend:v0.2.3    |
+| frontend     | 8080 | PORT="8080" -  PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550" CURRENCY_SERVICE_ADDR="currencyservice:7000" CART_SERVICE_ADDR="cartservice:7070" RECOMMENDATION_SERVICE_ADDR="recommendationservice:8080" SHIPPING_SERVICE_ADDR="shippingservice:50051" CHECKOUT_SERVICE_ADDR="checkoutservice:5050" AD_SERVICE_ADDR="adservice:9555"    | gcr.io/google-samples/microservices-demo/frontend:v0.2.3    |
 | cartservice  | 7070 | REDIS_ADDR="redis-cart:6379"    | gcr.io/google-samples/microservices-demo/cartservice:v0.2.3    |
 | productcatalogservice  | 3550 | PORT="3550"    | gcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3    |
 | currencyservice  | 7000 | PORT="7000"    | gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3    |
 | paymentservice  | 50051 | PORT="50051"    | gcr.io/google-samples/microservices-demo/paymentservice:v0.2.3    |
 | shippingservice  | 50051 | PORT="50051"    | gcr.io/google-samples/microservices-demo/shippingservice:v0.2.3    |
-| emailservice  | 8080 | PORT="8080" - DISABLE_PROFILER="1"    | gcr.io/google-samples/microservices-demo/emailservice:v0.2.3    |
-| checkoutservice  | 5050 | PORT="5050" PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550" SHIPPING_SERVICE_ADDR="shippingservice:50051" PAYMENT_SERVICE_ADDR="paymentservice:50051" EMAIL_SERVICE_ADDR="emailservice:5000" CURRENCY_SERVICE_ADDR="currencyservice:7000" CART_SERVICE_ADDR="cartservice:7070"    | gcr.io/google-samples/microservices-demo/checkoutservice:v0.2.3    |
-| recommendationservice  | 8080 | PORT="8080" PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550"    | gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.3    |
+| emailservice  | 8080 | PORT="8080"    | gcr.io/google-samples/microservices-demo/emailservice:v0.2.3    |
+| checkoutservice  | 5050 | PORT="5050" -  PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550" SHIPPING_SERVICE_ADDR="shippingservice:50051" PAYMENT_SERVICE_ADDR="paymentservice:50051" EMAIL_SERVICE_ADDR="emailservice:5000" CURRENCY_SERVICE_ADDR="currencyservice:7000" CART_SERVICE_ADDR="cartservice:7070"    | gcr.io/google-samples/microservices-demo/checkoutservice:v0.2.3    |
+| recommendationservice  | 8080 | PORT="8080" -  PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550"    | gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.3    |
 | adservice  | 9555 | PORT="9555"    | gcr.io/google-samples/microservices-demo/adservice:v0.2.3    |
 | loadgenerator  |  | FRONTEND_ADDR="frontend:80" - USERS="10"    | gcr.io/google-samples/microservices-demo/loadgenerator:v0.2.3    |
 
-
 ## Create Deployment and Service Configurations
+In this section we are going to create **Deployment** and **Service** configuration files for all microservices. 
 
+For simplicity we'll create a single manifest file for all microservices, so that we can deploy them in a single go. 
+
+### Email Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emailservice
+spec:
+  selector:
+    matchLabels:
+      app: emailservice
+  template:
+    metadata:
+      app: emailservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/emailservice:v0.2.3
+        ports: 
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emailservice
+spec:
+  type: ClusterIP
+  selector:
+    app: emailservice
+  ports:
+  - protocol: TCP 
+    port: 5000
+    targetPort: 8080
+```
