@@ -29,8 +29,8 @@ As a DevOps engineer, we need following information from the developer, to deplo
 In this microservices demo, Redis as a Message Broker or in-memory database is being used. 
 
 |Microservice |Language|Working on Port | Env. Variables | Image Path | Description                    |
-|----------|----------|-----------|-------------|-------------|--------------------| 
-| frontend     | Go | 8080 |     | gcr.io/google-samples/microservices-demo/frontend:v0.2.3    | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
+|----------|-------|--------|-------------|-------------|--------------------| 
+| frontend     | Go | 8080 | PORT="8080" PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550" CURRENCY_SERVICE_ADDR="currencyservice:7000" CART_SERVICE_ADDR="cartservice:7070" RECOMMENDATION_SERVICE_ADDR="recommendationservice:8080" SHIPPING_SERVICE_ADDR="shippingservice:50051" CHECKOUT_SERVICE_ADDR="checkoutservice:5050" AD_SERVICE_ADDR="adservice:9555"    | gcr.io/google-samples/microservices-demo/frontend:v0.2.3    | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically.|
 | cartservice  | C# | 7070 |     | gcr.io/google-samples/microservices-demo/cartservice:v0.2.3    | Stores the items in the user's shopping cart in Redis and retrieves it. |
 | productcatalogservice  | Go | 3550 |     | gcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3    | Provides the list of products from a JSON file and ability to search products and get individual products. |
 | currencyservice  | Nodejs | 7000 |     | gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3    | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
