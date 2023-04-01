@@ -223,3 +223,42 @@ spec:
     targetPort: 50051
 ```
 
+### Currency Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currencyservice
+spec:
+  selector:
+    matchLabels:
+      app: currencyservice
+  template:
+    metadata:
+      labels:
+        app: currencyservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3
+        ports: 
+        - containerPort: 7000
+        env:
+        - name: PORT
+          value: "7000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: currencyservice
+spec:
+  type: ClusterIP
+  selector:
+    app: currencyservice
+  ports:
+  - protocol: TCP 
+    port: 7000
+    targetPort: 7000
+```
+
