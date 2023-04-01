@@ -364,6 +364,8 @@ spec:
         env:
         - name: PORT
           value: "7070"
+        - name: REDIS_ADDR
+          value: "redis-cart:6379"
 ---
 apiVersion: v1
 kind: Service
