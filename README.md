@@ -49,7 +49,7 @@ As a DevOps engineer, we need following information from the developer, to deplo
 |Microservice |Working on Port | Env. Variables | Image Path |
 |----------|--------|-------------|-------------|
 | frontend     | 8080 | PORT="8080" -  PRODUCT_CATALOG_SERVICE_ADDR="productcatalogservice:3550" CURRENCY_SERVICE_ADDR="currencyservice:7000" CART_SERVICE_ADDR="cartservice:7070" RECOMMENDATION_SERVICE_ADDR="recommendationservice:8080" SHIPPING_SERVICE_ADDR="shippingservice:50051" CHECKOUT_SERVICE_ADDR="checkoutservice:5050" AD_SERVICE_ADDR="adservice:9555"    | gcr.io/google-samples/microservices-demo/frontend:v0.2.3    |
-| cartservice  | 7070 | REDIS_ADDR="redis-cart:6379"    | gcr.io/google-samples/microservices-demo/cartservice:v0.2.3    |
+| cartservice  | 7070 | PORT="7070" -  REDIS_ADDR="redis-cart:6379"    | gcr.io/google-samples/microservices-demo/cartservice:v0.2.3    |
 | productcatalogservice  | 3550 | PORT="3550"    | gcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3    |
 | currencyservice  | 7000 | PORT="7000"    | gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3    |
 | paymentservice  | 50051 | PORT="50051"    | gcr.io/google-samples/microservices-demo/paymentservice:v0.2.3    |
@@ -340,3 +340,41 @@ spec:
     targetPort: 9555
 ```
 
+### Cart Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartservice
+spec:
+  selector:
+    matchLabels:
+      app: cartservice
+  template:
+    metadata:
+      labels:
+        app: cartservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/cartservice:v0.2.3
+        ports: 
+        - containerPort: 7070
+        env:
+        - name: PORT
+          value: "7070"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cartservice
+spec:
+  type: ClusterIP
+  selector:
+    app: cartservice
+  ports:
+  - protocol: TCP 
+    port: 7070
+    targetPort: 7070
+```
