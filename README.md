@@ -551,4 +551,10 @@ Run following command to deploy all microservices.
 
 ![Microservices Services](images/microservices-services.png)
 
+![home-page](images/online-shop-home-page.png)
 
+![product-page](images/product-page.png)
+
+![shoping-cart](images/shoping-cart.png)
+
+![order-placement](images/order-placement.png)
