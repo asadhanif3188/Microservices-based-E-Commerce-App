@@ -492,7 +492,7 @@ spec:
     spec:
       containers:
       - name: service
-        image: gcr.io/google-samples/microservices-demo/frontend:v0.2.3
+        image: gcr.io/google-samples/microservices-demo/frontend:v0.6.0
         ports: 
         - containerPort: 8080
         env:
