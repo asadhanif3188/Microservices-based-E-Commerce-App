@@ -63,7 +63,7 @@ As a DevOps engineer, we need following information from the developer, to deplo
 ## Create Deployment and Service Configurations
 In this section we are going to create **Deployment** and **Service** configuration files for all microservices. 
 
-For simplicity we'll create a single manifest file for all microservices, so that we can deploy them in a single go. 
+For simplicity we'll create a single manifest file, i.e. `kubernetes-manifests/simple-config.yaml`, for all microservices, so that we can deploy them in a single go. 
 
 ### Email Service Manifest
 
@@ -78,7 +78,8 @@ spec:
       app: emailservice
   template:
     metadata:
-      app: emailservice
+      labels: 
+        app: emailservice
     spec:
       containers:
       - name: service
@@ -100,5 +101,46 @@ spec:
   ports:
   - protocol: TCP 
     port: 5000
+    targetPort: 8080
+```
+
+### Recommendation Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendationservice
+spec:
+  selector:
+    matchLabels:
+      app: recommendationservice
+  template:
+    metadata: 
+      labels:
+        app: recommendationservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.3
+        ports: 
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "productcatalogservice:3550"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendationservice
+spec:
+  type: ClusterIP
+  selector:
+    app: recommendationservice
+  ports:
+  - protocol: TCP 
+    port: 8080
     targetPort: 8080
 ```
