@@ -262,3 +262,43 @@ spec:
     targetPort: 7000
 ```
 
+### Shipping Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shippingservice
+spec:
+  selector:
+    matchLabels:
+      app: shippingservice
+  template:
+    metadata:
+      labels:
+        app: shippingservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.2.3
+        ports: 
+        - containerPort: 50051
+        env:
+        - name: PORT
+          value: "50051"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shippingservice
+spec:
+  type: ClusterIP
+  selector:
+    app: shippingservice
+  ports:
+  - protocol: TCP 
+    port: 50051
+    targetPort: 50051
+
+```
+
