@@ -120,7 +120,7 @@ spec:
     spec:
       containers:
       - name: service
-        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.6.0
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.2.3
         ports: 
         - containerPort: 50051
         env:
@@ -155,7 +155,7 @@ spec:
     spec:
       containers:
       - name: service
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.6.0
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3
         ports: 
         - containerPort: 7000
         env:
