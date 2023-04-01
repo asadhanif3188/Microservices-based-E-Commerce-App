@@ -527,3 +527,19 @@ spec:
     targetPort: 8080
     nodePort: 30007
 ```
+
+## Deploying Microservices into K8s Cluster
+It is time to deploy all microservices into the K8s cluster, i.e. Minikube. 
+
+Before deployment let us create a separate namespace, so that all microservices work under this namespace. 
+
+### Create Namespace
+Run following command to create namespace. 
+
+`kubectl create namespace shop-microservices`
+
+### Deploy Microservices
+Run following command to deploy all microservices. 
+
+`kubectl apply -f simple-config.yaml -n shop-microservices`
+
