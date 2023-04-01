@@ -299,6 +299,44 @@ spec:
   - protocol: TCP 
     port: 50051
     targetPort: 50051
+```
 
+### Ad Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adservice
+spec:
+  selector:
+    matchLabels:
+      app: adservice
+  template:
+    metadata:
+      labels:
+        app: adservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/adservice:v0.2.3
+        ports: 
+        - containerPort: 9555
+        env:
+        - name: PORT
+          value: "9555"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adservice
+spec:
+  type: ClusterIP
+  selector:
+    app: adservice
+  ports:
+  - protocol: TCP 
+    port: 9555
+    targetPort: 9555
 ```
 
