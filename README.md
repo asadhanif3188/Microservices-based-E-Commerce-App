@@ -144,3 +144,42 @@ spec:
     port: 8080
     targetPort: 8080
 ```
+
+### Product Catalog Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productcatalogservice
+spec:
+  selector:
+    matchLabels:
+      app: productcatalogservice
+  template:
+    metadata:
+      labels:
+        app: productcatalogservice
+    spec:
+      containers:
+      - name: service
+        image: xxxgcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3
+        ports: 
+        - containerPort: 3550
+        env:
+        - name: PORT
+          value: "3550"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: productcatalogservice
+spec:
+  type: ClusterIP
+  selector:
+    app: productcatalogservice
+  ports:
+  - protocol: TCP 
+    port: 3550
+    targetPort: 3550
+```
