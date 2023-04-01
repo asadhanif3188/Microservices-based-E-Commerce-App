@@ -492,7 +492,7 @@ spec:
     spec:
       containers:
       - name: service
-        image: gcr.io/google-samples/microservices-demo/frontend:v0.6.0
+        image: gcr.io/google-samples/microservices-demo/frontend:v0.2.3
         ports: 
         - containerPort: 8080
         env:
@@ -542,4 +542,13 @@ Run following command to create namespace.
 Run following command to deploy all microservices. 
 
 `kubectl apply -f simple-config.yaml -n shop-microservices`
+
+### Application Screenshots 
+
+![Microservices Deployed](images/microservices-deployed.png)
+
+![Microservices Pods](images/microservices-pods.png)
+
+![Microservices Services](images/microservices-services.png)
+
 
