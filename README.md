@@ -423,3 +423,54 @@ spec:
     targetPort: 6379
 ```
 
+### Checkout Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: checkoutservice
+spec:
+  selector:
+    matchLabels:
+      app: checkoutservice
+  template:
+    metadata:
+      labels:
+        app: checkoutservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.2.3
+        ports: 
+        - containerPort: 5050
+        env:
+        - name: PORT
+          value: "5050"
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "productcatalogservice:3550"
+        - name: SHIPPING_SERVICE_ADDR
+          value: "shippingservice:50051"
+        - name: PAYMENT_SERVICE_ADDR
+          value: "paymentservice:50051"
+        - name: EMAIL_SERVICE_ADDR
+          value: "emailservice:5000"
+        - name: CURRENCY_SERVICE_ADDR
+          value: "currencyservice:7000"
+        - name: CART_SERVICE_ADDR
+          value: "cartservice:7070"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: checkoutservice
+spec:
+  type: ClusterIP
+  selector:
+    app: checkoutservice
+  ports:
+  - protocol: TCP 
+    port: 5050
+    targetPort: 5050
+```
+
