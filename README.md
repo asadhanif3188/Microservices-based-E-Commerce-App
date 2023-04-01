@@ -163,7 +163,7 @@ spec:
     spec:
       containers:
       - name: service
-        image: xxxgcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3
+        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.3
         ports: 
         - containerPort: 3550
         env:
@@ -183,3 +183,43 @@ spec:
     port: 3550
     targetPort: 3550
 ```
+
+### Payment Service Manifest
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paymentservice
+spec:
+  selector:
+    matchLabels:
+      app: paymentservice
+  template:
+    metadata:
+      labels:
+        app: paymentservice
+    spec:
+      containers:
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.2.3
+        ports: 
+        - containerPort: 50051
+        env:
+        - name: PORT
+          value: "50051"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paymentservice
+spec:
+  type: ClusterIP
+  selector:
+    app: paymentservice
+  ports:
+  - protocol: TCP 
+    port: 50051
+    targetPort: 50051
+```
+
